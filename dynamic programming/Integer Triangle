@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+#define MAX 501
+int arr[MAX][MAX] = { 0, };
+int maxx = 0;
+
+int main(void)
+{
+	
+	int input,num;
+	cin >> input;
+	cin >> arr[1][1];
+	for (int a = 2; a <= input; a++) {
+		for(int b = 1; b <= a; b++) {
+			cin >> num;
+			if (arr[a - 1][b - 1] > arr[a - 1][b]) {
+				arr[a][b] = arr[a - 1][b - 1] + num;
+			}
+			else
+				arr[a][b] = arr[a - 1][b] + num;
+		}
+	}
+	for (int a = 1; a <= input; a++) {
+		if (arr[input][a] > maxx) {
+			maxx = arr[input][a];
+		}
+	}
+	cout << maxx << endl;
+	return 0;
+}
