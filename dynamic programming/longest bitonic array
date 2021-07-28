@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+#define MAX 1001
+int up[MAX] = { 0, };
+int num[MAX];
+int down[MAX+1] = { 0, };
+int main(void)
+{
+	int input, max = 0, count = 0;
+	cin >> input;
+	up[0] = 0;
+	num[0] = 0;
+	for (int a = 1; a <= input; a++) {
+		cin >> num[a];
+		max = 0;
+		for (int b = 0; b < a; b++) {
+			if (num[a] > num[b] && up[b] >= max)
+				max = up[b];
+		}
+		up[a] = max + 1;
+	}
+
+	for (int a = input; a >= 1; a--) {
+		max = 0;
+		for (int b = input + 1; b > a; b--) {
+			if (num[a] > num[b] && down[b] >= max)
+				max = down[b];
+		}
+		down[a] = max + 1;
+	}
+
+	max = 0;
+	for (int a = 1; a <= input; a++) {
+		if (up[a]+down[a] > max) {
+			max = up[a]+down[a];
+		}
+	}
+	cout << max-1 << endl;
+	return 0;
+
+}
